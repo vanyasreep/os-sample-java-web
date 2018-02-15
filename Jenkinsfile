@@ -22,6 +22,7 @@ pipeline {
         stage('Junit') {
           steps {
             echo 'junit tests'
+            junit 'build/reports/**/*.xml'
           }
         }
         stage('cucumber') {
