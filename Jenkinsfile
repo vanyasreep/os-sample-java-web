@@ -12,34 +12,38 @@ pipeline {
       }
     }
     stage('Test') {
-      steps {
-        sh '''parallel (
-        "JUnit": { 
-            sh "echo JUnit"
-        },
-        "DBUnit": { 
-            sh "echo DBUnit"
-        },
-        "Jasmine": { 
-            sh "echo Jasmine"
-        },
-      )'''
+      parallel {
+        stage('Test') {
+          steps {
+            echo 'Tests'
+          }
         }
-      }
-      stage('Dev') {
-        steps {
-          sh 'sh "echo Dev"'
+        stage('Junit') {
+          steps {
+            echo 'junit tests'
+          }
         }
-      }
-      stage('Staging') {
-        steps {
-          sh 'sh "echo Staging"'
-        }
-      }
-      stage('Production') {
-        steps {
-          sh ' sh "echo Production"'
+        stage('cucumber') {
+          steps {
+            echo 'cucumber test cases'
+          }
         }
       }
     }
+    stage('Dev') {
+      steps {
+        echo 'Dev env'
+      }
+    }
+    stage('Staging') {
+      steps {
+        echo 'stage env'
+      }
+    }
+    stage('Production') {
+      steps {
+        echo 'prod env'
+      }
+    }
   }
+}
