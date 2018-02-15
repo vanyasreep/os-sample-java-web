@@ -1,15 +1,31 @@
-pipeline {
-  agent any
-  stages {
-    stage('Checkout') {
-      steps {
-        git(url: 'https://github.com/santosh52krishna/os-sample-java-web.git', branch: 'master', credentialsId: 'santosh52krishna')
-      }
+ node {
+    // Clean workspace before doing anything
+    deleteDir()
+
+    try {
+        stage ('Clone') {
+            checkout scm
+        }
+        stage ('Build') {
+            sh "echo 'shell scripts to build project...'"
+        }
+        stage ('Tests') {
+            parallel 'static': {
+                sh "echo 'shell scripts to run static tests...'"
+            },
+            'unit': {
+                sh "echo 'shell scripts to run unit tests...'"
+            },
+            'integration': {
+                sh "echo 'shell scripts to run integration tests...'"
+            }
+        }
+        stage ('Deploy') {
+            sh "echo 'shell scripts to deploy to server...'"
+        }
+    } catch (err) {
+        currentBuild.result = 'FAILED'
+        throw err
     }
-    stage('Build') {
-      steps {
-        build 'mvn clean install'
-      }
-    }
-  }
 }
+ 
