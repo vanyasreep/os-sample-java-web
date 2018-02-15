@@ -2,26 +2,14 @@ pipeline {
   agent any
   stages {
     stage('Checkout') {
-      parallel {
-        stage('Checkout') {
-          steps {
-            git(url: 'https://github.com/santosh52krishna/os-sample-java-web.git', branch: 'master', credentialsId: 'santosh52krishna')
-          }
-        }
-        stage('intialize') {
-          steps {
-            sh '''sh \'\'\'
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                \'\'\''''
-          }
-        }
+      steps {
+        git(url: 'https://github.com/santosh52krishna/os-sample-java-web.git', branch: 'master', credentialsId: 'santosh52krishna')
       }
     }
     stage('Build') {
       steps {
         echo 'build'
-        sh 'sh \'mvn -Dmaven.test.failure.ignore=true install\''
+        sh 'mvn -Dmaven.test.failure.ignore=true install'
       }
     }
     stage('Test') {
