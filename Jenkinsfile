@@ -6,7 +6,7 @@ pipeline {
         git(url: 'https://github.com/santosh52krishna/os-sample-java-web.git', branch: 'master', credentialsId: 'santosh52krishna')
       }
     }
-    stage ('Build') {
+    /* stage ('Build') {
             //sh "echo 'shell scripts to build project...'"
         }
     stage ('Tests') {
@@ -23,7 +23,7 @@ pipeline {
         stage ('Deploy') {
             //sh "echo 'shell scripts to deploy to server...'"
         }
-	
+	*/
 	
    
   }
