@@ -6,25 +6,40 @@ pipeline {
         git(url: 'https://github.com/santosh52krishna/os-sample-java-web.git', branch: 'master', credentialsId: 'santosh52krishna')
       }
     }
-    /* stage ('Build') {
-            //sh "echo 'shell scripts to build project...'"
+    stage('Build') {
+      steps {
+        sh 'sh "echo Build"'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh '''parallel (
+        "JUnit": { 
+            sh "echo JUnit"
+        },
+        "DBUnit": { 
+            sh "echo DBUnit"
+        },
+        "Jasmine": { 
+            sh "echo Jasmine"
+        },
+      )'''
         }
-    stage ('Tests') {
-	parallel 'static': {
-               // sh "echo 'shell scripts to run static tests...'"
-            },
-            'unit': {
-               // sh "echo 'shell scripts to run unit tests...'"
-            },
-            'integration': {
-               // sh "echo 'shell scripts to run integration tests...'"
-            }
+      }
+      stage('Dev') {
+        steps {
+          sh 'sh "echo Dev"'
         }
-        stage ('Deploy') {
-            //sh "echo 'shell scripts to deploy to server...'"
+      }
+      stage('Staging') {
+        steps {
+          sh 'sh "echo Staging"'
         }
-	*/
-	
-   
+      }
+      stage('Production') {
+        steps {
+          sh ' sh "echo Production"'
+        }
+      }
+    }
   }
-}
