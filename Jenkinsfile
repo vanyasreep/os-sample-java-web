@@ -6,5 +6,10 @@ pipeline {
         git(url: 'https://github.com/santosh52krishna/os-sample-java-web.git', branch: 'master', credentialsId: 'santosh52krishna')
       }
     }
+    stage('Build') {
+      steps {
+        build 'clean install'
+      }
+    }
   }
 }
