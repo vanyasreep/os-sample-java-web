@@ -22,7 +22,7 @@ pipeline {
         stage('Junit') {
           steps {
             echo 'junit tests'
-            junit 'target/surefire-reports/*.xml'
+            sh 'mvn test -B -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true'
           }
         }
         stage('cucumber') {
