@@ -6,6 +6,16 @@ pipeline {
         git(url: 'https://github.com/santosh52krishna/os-sample-java-web.git', branch: 'master', credentialsId: 'santosh52krishna')
       }
     }
+    
+     stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
+            }
+        }
+    
     stage('Build') {
       steps {
         echo 'build'
