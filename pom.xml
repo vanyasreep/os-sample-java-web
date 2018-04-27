@@ -8,6 +8,12 @@
   <name>getting-started-tomcat Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
+  <distributionManagement>
+    <repository>
+      <id>localhost</id>
+      <url>http://localhost:8081/artifactory/example-repo-local/</url>
+    </repository>
+  </distributionManagement>
 
   <dependencies>
       <!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
