@@ -12,8 +12,8 @@
 
   <distributionManagement>
     <repository>
-      <id>jfrog</id>
-      <url>http://ec2-34-205-157-155.compute-1.amazonaws.com:8081/artifactory/libs-release-local/</url>
+      <id>central</id>
+      <url>http://100.27.30.46:8081/artifactory/libs-release-local/</url>
     </repository>
   </distributionManagement>
 
