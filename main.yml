@@ -1,0 +1,26 @@
+---
+- hosts: all
+  tasks:
+  - name: install java in remote machine
+    apt:
+      name: java
+      state: present
+
+  - name: tomcat installation
+    apt:
+      name: tomcat
+      state: latest
+
+      
+  - name: download war file into tomcat/webapps
+    get_url: 
+       url: https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
+       dest: /usr/share/tomcat8/webapps
+    notify: start tomcat
+          
+  handlers:
+    - name: start tomcat
+      service:
+         name: tomcat8
+         state: started
+   
